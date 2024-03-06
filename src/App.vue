@@ -1,6 +1,5 @@
 <script setup lang="ts">
 let func = () => {
-        // dasdasdas
     }
     console.log(func);
 </script>
