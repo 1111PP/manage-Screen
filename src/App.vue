@@ -1,6 +1,9 @@
 <script setup lang="ts">
 let func = () => {
     console.log(1);
+    console.log(1);
+    console.log(1);
+    console.log(1);
 }
 console.log(func);
 </script>
