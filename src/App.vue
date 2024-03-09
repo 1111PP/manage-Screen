@@ -1,15 +1,9 @@
 <script setup lang="ts">
-let func = () => {
-    console.log(1);
-    console.log(1);
-    console.log(1);
-    console.log(1);
-}
-console.log(func);
+import { RouterLink, useRouter, RouterView, useRoute } from "vue-router";
 </script>
 
 <template>
-    <!-- <h1>提交没有格式化的代码</h1> -->
+    <RouterView> </RouterView>
 </template>
 
-<style scoped></style>
+<style scoped lang="scss"></style>
