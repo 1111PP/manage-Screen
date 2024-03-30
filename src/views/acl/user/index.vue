@@ -334,7 +334,6 @@ const confirmClick = async () => {
                 </el-form-item>
                 <el-form-item label="角色列表">
                     <el-checkbox @change="handleCheckAllChange" v-model="checkAll">全选
-                        <!-- :indeterminate="isIndeterminate" -->
                     </el-checkbox>
                     <!-- v-model绑定数据会 -->
                     <el-checkbox-group @change="handleCheckedCitiesChange" v-model="roleParams.roleList">
