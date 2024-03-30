@@ -5,7 +5,7 @@ const router = createRouter({
   //路由模式hash
   history: createWebHashHistory(),
   routes: constantRoute,
-  //滚动行为
+  //路由切换后，滚动条位置归0
   scrollBehavior() {
     return {
       left: 0,

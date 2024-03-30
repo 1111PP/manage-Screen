@@ -2,22 +2,32 @@ export interface loginInfo {
   username: string
   password: string
 }
-interface userRequestData {
-  userId: number
-  avatar: string
-  username: string
-  password: string
-  desc: string
-  roles: string[]
-  buttons: string[]
+
+// 用户数据类型
+export interface userInfoType {
   routes: string[]
-  token: string
+  buttons: string[]
+  roles: string[]
+  name: string
+  avatar: string
 }
-interface dataType {
-  token?: string
-  message?: string
-}
-export interface loginRequest {
+
+//通用继承接口类型
+export interface baseType {
   code: number
-  data: dataType
+  message: string
+  ok: boolean
+}
+//登录api返回数据类型
+export interface loginRequest extends baseType {
+  data: string
+}
+//请求用户信息的接口返回数据类型
+export interface userInfoAPIType extends baseType {
+  data: userInfoType
+}
+// layout请求返回数据类型
+// 返回成功时响应对象.data:null
+export interface layoutAPIType extends baseType {
+  data: object
 }

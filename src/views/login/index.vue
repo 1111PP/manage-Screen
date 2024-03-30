@@ -3,11 +3,14 @@ import { User, Lock } from '@element-plus/icons-vue'
 import { ref, reactive } from 'vue'
 import { useUserData } from '@/store/module/user'
 import { storeToRefs } from 'pinia'
-import { getLoginInfoApi } from '@/api/user/index'
-import { useRouter } from 'vue-router'
+import { reqLoginAPI } from '@/api/user/index'
+import { useRoute, useRouter } from 'vue-router'
 import { ElMessage, ElNotification } from 'element-plus'
-import { type loginRequest, type loginInfo } from '@/api/user/type'
+import { } from '@/api/user/type'
 import { getTime } from '@/utils/time'
+import { type loginInfo } from '@/api/user/type'
+
+const route = useRoute()
 const router = useRouter()
 const userData = useUserData()
 const form = reactive<loginInfo>({
@@ -21,8 +24,8 @@ const rules = {
         {
             trigger: 'change',
             validator: (rule: any, value: string, cb: Function) => {
-                if (value.length >= 5 && value.length <= 10) cb()
-                else cb(new Error('账号长度为5-10个字符'))
+                if (value.length >= 2 && value.length <= 10) cb()
+                else cb(new Error('账号长度为2-10个字符'))
             }
         },
     ],
@@ -41,23 +44,35 @@ const login = async () => {
         if (valid) {
             isLoading.value = true
             //用户登录按钮触发，携带用户账号密码
-            const result: loginRequest = await getLoginInfoApi(form)
+            const result = await reqLoginAPI(form)
+            // console.log(result);
             if (result.code === 200) {
-                userData.token = (result.data.token as string)
-                localStorage.setItem('TOKEN', (result.data.token as string))
+                userData.token = result.data
+                localStorage.setItem('TOKEN', result.data)
+                //ajax携带用户token获取用户信息
+                userData.ReGetUserInfo()
                 ElNotification({
                     type: 'success',
                     title: '欢迎回来',
                     message: getTime(),
                 })
-                router.push('/home')
-                isLoading.value = false
+                //P49 13分，退出登录前记录当前path至route.path.redirect，再次登录时就可以直接跳转到原先path页面
+                const redirectPath: string = (route.query.redirect as string)
+                //如果没有redirectPath则登录正常跳转至首页
+                router.push(redirectPath || '/home')
+                isLoading.value = false//取消登录按钮的加载效果
             } else {
+                ElMessage({
+                    type: 'error',
+                    message: '账号或密码错误',
+                })
                 setTimeout(() => isLoading.value = false, 1000)
             }
         }
     })
 }
+// console.log(route);
+
 </script>
 
 <template>
