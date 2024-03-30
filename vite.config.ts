@@ -3,7 +3,6 @@ import vue from '@vitejs/plugin-vue'
 import { viteMockServe } from 'vite-plugin-mock'
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 import path from 'path'
-// https://vitejs.dev/config/
 export default defineConfig(({ command, mode }) => {
   //获取各种环境下的对应的变量
   let env = loadEnv(mode, process.cwd())
