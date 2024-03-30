@@ -234,6 +234,7 @@ const handleCheckAllChange = () => {
 const handleCheckedCitiesChange = (value: number[]) => {
     checkAll.value = value.length === allRole.value.length ? true : false
 }
+
 //确认分配职位按钮
 const confirmClick = async () => {
     const userId = roleParams.value.id
@@ -241,7 +242,6 @@ const confirmClick = async () => {
     const r = await reqSetUserRole({
         userId, roleIdList
     })
-    // console.log(r);
     if (r.code == 200) {
         drawer2.value = false
         getHasUser(pageNo.value)
