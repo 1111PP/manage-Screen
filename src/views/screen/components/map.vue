@@ -66,8 +66,8 @@ onMounted(() => {
         geo: {
             map: 'china',
             roam: true,
-            zoom: 1.4,
-            top: 230,
+            zoom: 1.5,
+            top: 160,
             //地图上文字设置
             label: {
                 show: true,
@@ -147,12 +147,15 @@ onMounted(() => {
         ]
     })
 })
+const toMap = () => {
+    location.href = 'http://localhost:5177/'
+}
 </script>
 
 <template>
     <!-- <div>1</div> -->
     <div class="box">
-        <div class="mapContain" ref="charts">
+        <div class="mapContain" @click="toMap" ref="charts">
         </div>
         <!-- <div class="top" style="margin-top: 0;">
             <div class="text">全国景区游客趋势图</div>
@@ -163,7 +166,7 @@ onMounted(() => {
 
 <style scoped lang="scss">
 .box {
-    height: 100%;
+    margin-top: 50px;
     width: 100%;
     display: flex;
     flex-flow: column;

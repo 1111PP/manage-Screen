@@ -12,20 +12,27 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@turf/turf": "^7.0.0",
     "@types/nprogress": "^0.2.3",
     "axios": "^1.6.7",
+    "cesium": "^1.118.2",
     "echarts": "^5.5.0",
     "echarts-liquidfill": "^3.1.0",
     "element-plus": "^2.6.0",
     "lodash": "^4.17.21",
+    "mitt": "^3.0.1",
     "moment": "^2.30.1",
+    "nanoid": "^5.0.7",
     "nprogress": "^0.2.0",
     "pinia": "^2.1.7",
     "sass": "^1.71.1",
     "sass-loader": "^14.1.1",
+    "vite-plugin-cesium": "^1.2.22",
     "vite-plugin-mock": "^2.9.6",
     "vue": "^3.4.19",
-    "vue-router": "^4.3.0"
+    "vue-router": "^4.3.0",
+    "vue-seamless-scroll": "^1.1.23",
+    "vue3-seamless-scroll": "^2.0.1"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.23.10",

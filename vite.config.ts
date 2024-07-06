@@ -2,6 +2,8 @@ import { defineConfig, loadEnv } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import { viteMockServe } from 'vite-plugin-mock'
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
+import cesium from 'vite-plugin-cesium'
+
 import path from 'path'
 // https://vitejs.dev/config/
 export default defineConfig(({ command, mode }) => {
@@ -10,6 +12,7 @@ export default defineConfig(({ command, mode }) => {
   return {
     plugins: [
       vue(),
+      cesium(),
       createSvgIconsPlugin({
         iconDirs: [path.resolve(process.cwd(), 'src/assets/icons')],
         symbolId: 'icon-[dir]-[name]',

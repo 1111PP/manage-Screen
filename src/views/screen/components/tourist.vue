@@ -1,12 +1,52 @@
 <script lang='ts' setup>
-import { ref, onMounted } from 'vue'
+import { ref, watch, onMounted } from 'vue'
 import * as echarts from 'echarts';
 import 'echarts-liquidfill'
-const peopleCount = ref<string>("54188")
+const props = defineProps({
+    data: {
+        type: Object,
+        default: () => ({})
+    }
+})
+let mycharts: any
 const charts = ref()
+const peopleCount = ref<string>("50000")
+const percent = ref<number>(0.1)
+
+watch(() => props.data, () => {
+    peopleCount.value = String(props.data.touristCount)
+    percent.value = Number(props.data.percent)
+
+    if (mycharts) {
+        mycharts.setOption({
+            series: [{
+                data: [
+                    {
+                        value: percent.value,
+                        itemStyle: {
+                            color: "rgb(0,2,219,0.5)"
+                        }
+                    },
+                    {
+                        value: Math.max(percent.value - 0.1, 0),
+                        itemStyle: {
+                            color: "rgb(1,70,219)"
+                        }
+                    },
+                    {
+                        value: Math.max(percent.value - 0.2, 0),
+                        itemStyle: {
+                            color: "rgb(3,122,219,0.5)"
+                        }
+                    }
+                ]
+            }]
+        });
+    }
+})
 
 onMounted(() => {
-    let mycharts = echarts.init(charts.value);
+    mycharts = echarts.init(charts.value);
     mycharts.setOption({
         title: {
             // text: '水球图'
@@ -15,19 +55,19 @@ onMounted(() => {
             type: 'liquidFill',//系列
             data: [
                 {
-                    value: 0.6,
+                    value: percent.value,
                     itemStyle: {
                         color: "rgb(0,2,219,0.5)"
                     }
                 },
                 {
-                    value: 0.4,
+                    value: Math.max(percent.value - 0.1, 0),
                     itemStyle: {
                         color: "rgb(1,70,219)"
                     }
                 },
                 {
-                    value: 0.3,
+                    value: Math.max(percent.value - 0.2, 0),
                     itemStyle: {
                         color: "rgb(3,122,219,0.5)"
                     }
@@ -94,12 +134,12 @@ onMounted(() => {
             <div class="text">实时游客统计</div>
             <img class="img" src="../images/dataScreen-title.png" alt="">
         </div>
-        <div class="middle">可容纳人数：<span style="color:yellow">{{ peopleCount }}</span>人</div>
+        <div class="middle">当前游客人数<span style="color:yellow">{{ peopleCount }}</span>人</div>
         <div class="number">
             <span class="people" v-for="idx in peopleCount.length" :key="idx">{{ peopleCount[idx - 1] }}</span>
         </div>
 
-        <div class="charts" ref="charts">123</div>
+        <div class="charts" ref="charts">999</div>
     </div>
 </template>
 

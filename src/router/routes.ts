@@ -3,26 +3,26 @@ export const constantRoute = [
   {
     //登录成功以后展示数据的路由
     path: '/',
-    component: () => import('@/views/layout/index.vue'),
-    name: 'layout',
-    meta: {
-      title: '',
-      hidden: false,
-      icon: '',
-    },
-    redirect: '/home',
-    children: [
-      {
-        path: '/home',
-        name: 'Home',
-        component: () => import('@/views/home/index.vue'),
-        meta: {
-          title: '首页',
-          hidden: false,
-          icon: 'HomeFilled',
-        },
-      },
-    ],
+    // component: () => import('@/views/layout/index.vue'),
+    // name: 'layout',
+    // meta: {
+    //   title: '',
+    //   hidden: false,
+    //   icon: '',
+    // },
+    redirect: '/screen',
+    // children: [
+    //   {
+    //     path: '/home',
+    //     name: 'Home',
+    //     component: () => import('@/views/home/index.vue'),
+    //     meta: {
+    //       title: '首页',
+    //       hidden: false,
+    //       icon: 'HomeFilled',
+    //     },
+    //   },
+    // ],
   },
   {
     path: '/login',

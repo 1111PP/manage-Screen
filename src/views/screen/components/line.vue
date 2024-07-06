@@ -1,9 +1,18 @@
 <script lang='ts' setup>
 import * as echarts from 'echarts';
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, watch } from 'vue'
 const charts = ref()
+const props = defineProps(['data'])
+const data = ref<[]>([])
+let mycharts: any
+watch(() => props.data, () => {
+    data.value = props.data
+    mycharts.setOption({
+        series: data.value
+    })
+})
 onMounted(() => {
-    let mycharts = echarts.init(charts.value)
+    mycharts = echarts.init(charts.value)
     mycharts.setOption({
         title: {
             text: "游客趋势图",
@@ -55,9 +64,8 @@ onMounted(() => {
         xAxis: [{
             boundaryGap: false,//x轴左右两侧不留间隙
             min: 0,
-            max: 10,
+            max: 30,
             type: 'category',
-            data: ['01/15', '01/18', '01/21', '01/24', '01/27', '01/30', '02/02', '02/05', '02/08', '02/011', '02/14'],
             //x轴的轴线
             axisLine: {
                 show: true,
@@ -100,8 +108,16 @@ onMounted(() => {
         }],
         series: [{
             type: 'line',
-            data: [10, 10, 30, 12, 15, 3, 10, 15, 20, 30, 15, 3, 30, 15, , 30, 12, 15, 3, 30, 15],
+            data: [
+                10, 10, 30, 12, 15,
+                3, 10, 15, 20, 30,
+                10, 10, 30, 12, 15,
+                3, 10, 15, 20, 30,
+                10, 10, 30, 12, 15,
+                3, 10, 15, 20, 13, 12
+            ],
             smooth: true,//平滑曲线，不然是带折的尖的
+            animation: false,
             yAxisIndex: 0,
             symbol: 'circle',
             symbolSize: 6,
@@ -111,7 +127,6 @@ onMounted(() => {
                 color: "#fff",
                 borderColor: "#00FFFF",
                 borderWidth: 2,
-
             },
             //单折线的样式
             lineStyle: {
@@ -122,7 +137,6 @@ onMounted(() => {
                             offset: 0,
                             color: '#00FFFF00'
                         },
-
                         {
                             offset: 0.5,
                             color: '#00FFFF'

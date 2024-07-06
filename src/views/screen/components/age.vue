@@ -1,11 +1,22 @@
 <script lang='ts' setup>
-import { ref, onMounted } from 'vue'
+import { ref, watch, onMounted } from 'vue'
 import * as echarts from 'echarts'
-
+const props = defineProps(['data'])
+const data = ref<[]>([])
 let charts = ref()
+let mycharts: any
+watch(() => props.data, () => {
+    data.value = props.data
+    // console.log(data.value);
+    mycharts.setOption({
+        series: {
+            data: data.value
+        }
+    })
+})
 
 onMounted(() => {
-    let mycharts = echarts.init(charts.value)
+    mycharts = echarts.init(charts.value)
     mycharts.setOption({
         tooltip: {
             trigger: 'item'

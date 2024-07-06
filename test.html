@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            background-color: gray;
+            width: 1980px;
+            height: 1080px;
+            transform-origin: left top;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            transition: all 0.5s;
+        }
+    </style>
+</head>
+
+<body>
+    <div></div>
+    <script>
+        const div = document.querySelector('div')
+        let rate = 1
+        const reSizeBox = () => {
+            const screenWidth = window.innerWidth
+            const screenHeight = window.innerHeight
+            const w = 1980
+            const h = 1080
+            rateW = screenWidth / w
+            rateH = screenHeight / h
+            rate = Math.min(rateW, rateH)
+            console.log(rate);
+            div.style.transform = `scale(${rate})  translate(-50%, -50%)`
+        }
+        const debounce = (func, delay) => {
+            let timer
+            return function () {
+                timer && clearTimeout(timer)
+                timer = setTimeout(() => {
+                    func()
+                    timer = null
+                }, delay)
+            }
+        }
+        window.addEventListener('resize', debounce(reSizeBox, 100))
+// const list = document.querySelector('ul');
+        // const duration = 1000;
+        // const liHeight = 50;
+        // let currIndex = 0
+        // const moveLi = () => {
+        //     let from = liHeight * currIndex
+        //     currIndex++
+        //     const to = liHeight * currIndex
+        //     //手动实现过渡效果
+        //     // 实际上就是从to -> from 的位置需要一点一点偏移过去，达到过渡效果
+        //     const totalDuration = 500//总共在500ms内完成一次滚动
+        //     const duration2 = 10//每次变化间隔时间
+        //     const times = totalDuration / duration2//总共变化的次数
+        //     const step = (to - from) / times//每次变化的距离
+        //     let timer = setInterval(() => {
+        //         from += step
+        //         if (from >= to) {
+        //             clearInterval(timer)
+        //             if (currIndex >= list.children.length - 1) {
+        //                 console.log('end');
+        //                 currIndex = 0
+        //                 // from = 0
+        //                 return
+        //             }
+        //         }
+        //         list.scrollTop = from
+        //     }, duration2)
+        // }
+        // setInterval(moveLi, duration)
+    // const routes = [
+    // "aaa", "User", "Category", "Discount", "ActivityEdit", "CouponRule", "Product", "Activity", "CouponAdd",
+    // "Trademark", "test1", "Attr", "ActivityAdd", "ASD ", "CouponEdit", "OrderShow", "111", "Permission", "Spu",
+    // "UserList", "ClientUser", "Order", "33", "t't", "Coupon", "permision", "6123", "Acl", "ActivityRule", "Role",
+    // "RoleAuth", "222", "Refund", "1223", "x", "OrderList", "Sku", "Screen"
+    // ];
+    // const asyncRoute = [
+    // //
+    // {
+    // path: '/acl',
+    // component: () => import('@/views/layout/index.vue'),
+    // name: 'Acl',
+    // meta: {
+    // title: '权限管理',
+    // icon: 'Lock',
+    // },
+    // redirect: '/acl/user',
+    // children: [
+    // {
+    // path: '/acl/user',
+    // component: () => import('@/views/acl/user/index.vue'),
+    // name: 'User',
+    // meta: {
+    // title: '用户管理',
+    // icon: 'User',
+    // },
+    // },
+    // {
+    // path: '/acl/role',
+    // component: () => import('@/views/acl/role/index.vue'),
+    // name: 'Role',
+    // meta: {
+    // title: '角色管理',
+    // icon: 'UserFilled',
+    // },
+    // },
+    // {
+    // path: '/acl/permission',
+    // component: () => import('@/views/acl/permission/index.vue'),
+    // name: 'Permission',
+    // meta: {
+    // title: '菜单管理',
+    // icon: 'Monitor',
+    // },
+    // },
+    // ],
+    // },
+    // {
+    // path: '/product',
+    // component: () => import('@/views/layout/index.vue'),
+    // name: 'Product',
+    // meta: {
+    // title: '商品管理',
+    // icon: 'Goods',
+    // },
+    // redirect: '/product/trademark',
+    // children: [
+    // {
+    // path: '/product/trademark',
+    // component: () => import('@/views/product/trademark/index.vue'),
+    // name: 'Trademark',
+    // meta: {
+    // title: '品牌管理',
+    // icon: 'ShoppingCartFull',
+    // },
+    // },
+    // {
+    // path: '/product/attr',
+    // component: () => import('@/views/product/attr/index.vue'),
+    // name: 'Attr',
+    // meta: {
+    // title: '属性管理',
+    // icon: 'ChromeFilled',
+    // },
+    // },
+    // {
+    // path: '/product/spu',
+    // component: () => import('@/views/product/spu/index.vue'),
+    // name: 'Spu',
+    // meta: {
+    // title: 'SPU管理',
+    // icon: 'Calendar',
+    // },
+    // },
+    // {
+    // path: '/product/sku',
+    // component: () => import('@/views/product/sku/index.vue'),
+    // name: 'Sku',
+    // meta: {
+    // title: 'SKU管理',
+    // icon: 'Orange',
+    // },
+    // },
+    // ],
+    // },
+    // ]
+    // const flatArr1 = (arr, routes) => {
+    // return arr.filter(i => {
+    // if (routes.includes(i.name)) {
+    // if (i.children && i.children.length !== 0) {
+    // i.children = flatArr(i.children, routes)
+    // }
+    // return true
+    // }
+    // })
+    // }
+
+
+    // const arr = [1, 2, [3, 4]]
+    // const flatArr = (arr) => {
+    // return arr.reduce((p, c) => {
+    // if (Array.isArray(c)) {
+    // p = p.concat(flatArr(c))
+    // } else {
+    // p.push(c)
+    // }
+    // return p
+    // }, [])
+    // }
+    // const r = flatArr(arr)
+    // console.log(r);
+    </script>
+</body>
+
+</html>

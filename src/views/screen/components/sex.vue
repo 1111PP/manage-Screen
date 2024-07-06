@@ -1,9 +1,58 @@
 <script lang='ts' setup>
 import * as echarts from 'echarts';
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, watch, } from 'vue'
+const props = defineProps(['data'])
+const manRate = ref<number>(0.5)
+const womanRate = ref<number>(0.5)
 const charts = ref()
+let mycharts: any
+watch(() => props.data, () => {
+    manRate.value = Number(props.data.man)
+    womanRate.value = Number(props.data.women)
+
+    mycharts.setOption({
+        series: [
+            {
+                type: 'bar',//柱状图
+                data: [manRate.value * 100],
+                barWidth: 20,
+                z: 100,
+                itemStyle: {
+                    color: new echarts.graphic.LinearGradient(1, 0, 0, 0, [{
+                        offset: 0,
+                        color: "skyblue"
+                    },
+                    {
+                        offset: 1,
+                        color: 'rgba(0, 119, 247,0.8)'
+                    }
+                    ], false),
+                    borderRadius: 20,
+                }
+            },
+            {
+                type: 'bar',//柱状图
+                data: [100],
+                barWidth: 20,
+                barGap: "-100%",//🈯向下偏移，重叠一起
+                itemStyle: {
+                    color: new echarts.graphic.LinearGradient(1, 0, 0, 0, [{
+                        offset: 0,
+                        color: "rgba(247, 0, 236, 0.7)"
+                    },
+                    {
+                        offset: 1,
+                        color: 'hotpink '
+                    }
+                    ], false),
+                    borderRadius: 20,
+                }
+            }
+        ]
+    })
+})
 onMounted(() => {
-    let mycharts = echarts.init(charts.value)
+    mycharts = echarts.init(charts.value)
     mycharts.setOption({
         title: {
             text: '男女比例',
@@ -24,7 +73,7 @@ onMounted(() => {
         series: [
             {
                 type: 'bar',//柱状图
-                data: [58],
+                data: [50],
                 barWidth: 20,
                 z: 100,
                 itemStyle: {
@@ -44,7 +93,7 @@ onMounted(() => {
                 type: 'bar',//柱状图
                 data: [100],
                 barWidth: 20,
-                barGap: "-100%",
+                barGap: "-100%",//🈯向下偏移，重叠一起
                 itemStyle: {
                     color: new echarts.graphic.LinearGradient(1, 0, 0, 0, [{
                         offset: 0,
@@ -88,8 +137,8 @@ onMounted(() => {
         </div>
 
         <div class="rate">
-            <p>男士58%</p>
-            <p>女士42%</p>
+            <p>男士{{ (manRate * 100).toFixed(0) }}%</p>
+            <p>女士{{ (womanRate * 100).toFixed(0) }}%</p>
         </div>
         <div class="charts" ref='charts'></div>
     </div>

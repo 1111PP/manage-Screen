@@ -4,6 +4,7 @@ import { reqSelectUser, reqRemoveUser, reqUserInfo, reqAddOrUpdateUser, reqAllRo
 import type { SetRoleData, UserResponseData, Records, User, AllRoleResponseData, AllRole } from '@/api/acl/user/type';
 import { ElMessage } from 'element-plus'
 import { fi } from 'element-plus/es/locale';
+import { log } from 'console';
 //默认页码
 let pageNo = ref<number>(1);
 //一页展示几条数据
@@ -207,6 +208,8 @@ const roleParams = ref<any>({
 const allRole = ref<AllRole>([])
 //分配角色按钮
 const setPermisstion = async (row: any) => {
+    console.log(row);
+
     roleParams.value.roleList = []
     roleParams.value.id = 0
     drawer2.value = true

@@ -53,7 +53,6 @@ export const useUserData = defineStore('userData', () => {
 
   //获取用户数据并存储至pinia中，如果失败则返回失败状态Promise对象，用于👇方try和catch捕获
   const ReGetUserInfo = async () => {
-    // 多层解构
     const { code, data } = await getUserInfoApi()
     if (code === 200 && data) {
       setUserInfo(data)
@@ -68,6 +67,7 @@ export const useUserData = defineStore('userData', () => {
       //🟥filter虽然不会修改原数组，会返回一个新数组，但是只有最外层的数据是不一样的，新数组内的复杂类型的属性还是浅拷贝
       hasAsyncRoute = filterAsyncRoute(cloneDeep(asyncRoute), data.routes)
       // console.log(asyncRoute[0] == hasAsyncRoute[0])
+      console.log(hasAsyncRoute)
 
       //🟥整合该用户所拥有的所有路由
       //1.用于渲染菜单组件

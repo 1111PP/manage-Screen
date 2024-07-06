@@ -25,9 +25,6 @@ import moment from 'moment'
 const time = ref(moment().format('YYYY年MM月DD日 hh:mm:ss'));
 let timer: any = 0
 const router = useRouter()
-const toHome = () => {
-    router.push('/home')
-}
 onMounted(() => {
     // getCurrentTime()
     timer = setInterval(() => {
@@ -43,7 +40,7 @@ onBeforeUnmount(() => {
 <template>
     <div class="top">
         <div class="left">
-            <span class="leftBtn" @click="toHome">
+            <span class="leftBtn">
                 <span class="topleftText">
                     首页
                 </span>
